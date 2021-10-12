@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HumanResources.DataModels\HumanResources.DataModels.csproj" />
-    <ProjectReference Include="..\HumanResources.Repositories\HumanResources.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

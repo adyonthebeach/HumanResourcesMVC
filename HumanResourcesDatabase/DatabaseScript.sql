@@ -49,6 +49,18 @@ CREATE TABLE [dbo].[ReferenceCodes](
 ) ON [PRIMARY]
 GO
 
+SET IDENTITY_INSERT [dbo].[ReferenceCodes] ON 
+GO
+INSERT [dbo].[ReferenceCodes] ([StatusId], [StatusDescription], [StatusGroup]) VALUES (1, N'Approved', N'HumanResourceStatus')
+GO
+INSERT [dbo].[ReferenceCodes] ([StatusId], [StatusDescription], [StatusGroup]) VALUES (2, N'Pending', N'HumanResourceStatus')
+GO
+INSERT [dbo].[ReferenceCodes] ([StatusId], [StatusDescription], [StatusGroup]) VALUES (3, N'Disabled', N'HumanResourceStatus')
+GO
+SET IDENTITY_INSERT [dbo].[ReferenceCodes] OFF
+GO
+
+
 CREATE TABLE [dbo].[HumanResource](
 	[HumanResourceId] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](100) NOT NULL,
