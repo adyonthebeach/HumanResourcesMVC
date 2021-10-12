@@ -20,11 +20,7 @@ User Story | Acceptance Criteria
 
 2	| Given I am a Human resources manager When I create a new human resource with valid data then a new record will be added to the database
 
-2	| Given I am a Human resources manager When I create a new human resource with invalid data then an error message will be returned
-
 3	| Given I am a Human resources manager When I update an existing human resource with valid data then the database record will be updated
-
-3	| Given I am a Human resources manager When I update an existing human resource with invalid data then an error message will be returned
 
 4	| Given I am a Human resources manager When I delete an existing human resource Then the database record will be deleted
 
@@ -32,11 +28,12 @@ User Story | Acceptance Criteria
 ## Solution deployment
 1. Download repository
 2. Open DatabaseScript.sql in MSSQL
-3. Update the database installation location
+3. Update the database installation location ****NOTE : This step is important ****
 4. Run script
 5. Open Visual Studio Solution in VS2019
-6. Build Solution
-7. Run Tests to seed database data (Specflow Extension may be needed)
+6. Update the database connection string ****NOTE : This step is also important ****
+7. Build Solution
+8. Run Tests to seed database data (Specflow Extension may be needed)
 
 ## Considerations
  
