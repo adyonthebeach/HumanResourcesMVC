@@ -13,7 +13,9 @@ Technical excerise demonstrating the use of Asp.NET MVC web technology, applicat
 4	As a Human resources manager I would like to delete an existing human resource
 
 ## Acceptance Criteria
+
 User Story | Acceptance Criteria
+
 1	| Given I am a Human resources manager When I request the Human resources then a list of all human resources will be returned 
 
 2	| Given I am a Human resources manager When I create a new human resource with valid data then a new record will be added to the database
