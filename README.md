@@ -1,6 +1,6 @@
 # HumanResourcesMVC
 
-Technical excerise demonstrating the use of Asp.NET MVC web technology, applications layers, SOLID coding principles and SQL database queries.
+Technical excercise demonstrating the use of Asp.NET MVC web technology, applications layers, testing using SpecFlow, SOLID coding principles and SQL database queries.
 
 ## User Stories
 
