@@ -28,7 +28,7 @@ User Story | Acceptance Criteria
 ## Solution deployment
 1. Download repository
 2. Open DatabaseScript.sql in MSSQL
-3. Update the database installation location ****NOTE : This step is important ****
+3. Update the database installation location on lines 8 & 10 ****NOTE : This step is important ****
 4. Run script
 5. Open Visual Studio Solution in VS2019
 6. Update the database connection string ****NOTE : This step is also important ****
