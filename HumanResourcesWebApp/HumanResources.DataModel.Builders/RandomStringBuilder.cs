@@ -3,7 +3,7 @@ using System.Text;
 
 namespace HumanResources.DataModel.Builders
 {
-    internal class RandomStringBuilder
+    public class RandomStringBuilder
     {
         private int _stringLength;
 

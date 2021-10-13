@@ -22,29 +22,48 @@ namespace HumanResources.Repositories
 
         public HumanResource Create(HumanResource humanResource)
         {
-            using (_sqlConnection)
-            {
-                SqlCommand command = new SqlCommand("CreateResource", _sqlConnection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
-                command.Parameters.AddWithValue("@lastname", humanResource.LastName);
-                command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
-                command.Parameters.AddWithValue("@email", humanResource.Email);
-                command.Parameters.AddWithValue("@department", humanResource.Department);
-                command.Parameters.AddWithValue("@status", humanResource.Status);
+            SqlCommand command = new SqlCommand("CreateResource", _sqlConnection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
+            command.Parameters.AddWithValue("@lastname", humanResource.LastName);
+            command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
+            command.Parameters.AddWithValue("@email", humanResource.Email);
+            command.Parameters.AddWithValue("@department", humanResource.Department);
+            command.Parameters.AddWithValue("@status", humanResource.Status);
                 
 
-                _sqlConnection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+            _sqlConnection.Open();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
                 {
-                    if (reader.Read())
-                    {
-                        humanResource.EmployeeNumber = int.Parse(reader["EmployeeNumber"].ToString());
-                    }
-
-                    reader.Close();
+                    humanResource.EmployeeNumber = int.Parse(reader["EmployeeNumber"].ToString());
                 }
+
+                reader.Close();
             }
+            _sqlConnection.Close();
+
+            return humanResource;
+        }
+
+        public HumanResource Update(HumanResource humanResource)
+        {
+            SqlCommand command = new SqlCommand("UpdateResource", _sqlConnection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@employeenumber", humanResource.EmployeeNumber);
+            command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
+            command.Parameters.AddWithValue("@lastname", humanResource.LastName);
+            command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
+            command.Parameters.AddWithValue("@email", humanResource.Email);
+            command.Parameters.AddWithValue("@department", humanResource.Department);
+            command.Parameters.AddWithValue("@status", humanResource.Status);
+
+
+            _sqlConnection.Open();
+            command.ExecuteNonQuery();
+
+            _sqlConnection.Close();
 
             return humanResource;
         }

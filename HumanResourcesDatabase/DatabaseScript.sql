@@ -119,3 +119,36 @@ BEGIN
 END
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Adrian Walsh
+-- Create date: 13/10/2021
+-- Description:	
+-- =============================================
+CREATE PROCEDURE UpdateResource 
+	@employeenumber int,
+    @firstname varchar(100),
+    @lastname varchar(100),
+    @dateOfBirth datetime,
+    @email varchar(200),
+    @department varchar(100),
+    @status varchar(100)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    UPDATE HumanResource
+	SET FirstName = @firstname,
+		LastName = @lastname,
+		DateOfBirth = @dateOfBirth,
+		Email = @email,
+		Department = @department,
+		StatusId = (SELECT statusId 
+					 FROM ReferenceCodes 
+					 WHERE StatusDescription = @status 
+						AND StatusGroup = 'HumanResourceStatus')
+END
+GO

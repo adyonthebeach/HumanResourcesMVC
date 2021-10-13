@@ -23,5 +23,10 @@ namespace HumanResources.Services
         {
             return _humanResourceRepository.Create(humanResource);
         }
+
+        public HumanResource Update(HumanResource humanResource)
+        {
+            return _humanResourceRepository.Update(humanResource);
+        }
     }
 }

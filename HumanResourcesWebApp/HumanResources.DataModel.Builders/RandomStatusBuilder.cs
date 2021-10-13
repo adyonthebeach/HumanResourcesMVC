@@ -4,6 +4,7 @@ namespace HumanResources.DataModel.Builders
 {
     public class RandomStatusBuilder
     {
+        private string _excludedStatus;
         public string Build()
         {
             Random random = new Random();
@@ -13,19 +14,25 @@ namespace HumanResources.DataModel.Builders
             return GetStatusFromStatusId(statusId);
         }
 
+        public RandomStatusBuilder ExcludeStatus(string statusToExclude)
+        {
+            _excludedStatus = statusToExclude;
+            return this;
+        }
+
         private string GetStatusFromStatusId(int statusId)
         {
             if(statusId == 1)
             {
-                return "Approved";
+                return "Approved" != _excludedStatus ? "Approved" : "Pending";
             }
 
             if(statusId == 2)
             {
-                return "Pending";
+                return "Pending" != _excludedStatus ? "Pending" : "Disabled";
             }
 
-            return "Disabled";
+            return "Disabled" != _excludedStatus ? "Disabled" : "Approved";
         }
     }
 }

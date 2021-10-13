@@ -7,5 +7,6 @@ namespace HumanResources.Repositories.Interfaces
     {
         HumanResource Create(HumanResource humanResource);
         List<HumanResource> GetAllHumanResources();
+        HumanResource Update(HumanResource humanResource);
     }
 }
