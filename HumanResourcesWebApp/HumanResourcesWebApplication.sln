@@ -5,15 +5,17 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.WebApplication", "HumanResources.WebApplication\HumanResources.WebApplication.csproj", "{C1BDC92B-0395-4BC2-9E87-67B601D48CC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Services.Tests", "HumanResources.Services.Tests\HumanResources.Services.Tests.csproj", "{BDE5F435-5780-485E-8BB1-91F8EA85C23B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Services.Tests", "HumanResources.Services.Tests\HumanResources.Services.Tests.csproj", "{BDE5F435-5780-485E-8BB1-91F8EA85C23B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Repositories", "HumanResources.Repositories\HumanResources.Repositories.csproj", "{031D2DA4-FABB-4F9C-ADF4-2FADD53F4322}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Repositories", "HumanResources.Repositories\HumanResources.Repositories.csproj", "{031D2DA4-FABB-4F9C-ADF4-2FADD53F4322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.DataModels", "HumanResources.DataModels\HumanResources.DataModels.csproj", "{4CD48BD3-28BB-41C9-A177-2FB24B992B65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.DataModels", "HumanResources.DataModels\HumanResources.DataModels.csproj", "{4CD48BD3-28BB-41C9-A177-2FB24B992B65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Services", "HumanResources.Services\HumanResources.Services.csproj", "{50053463-B6CD-4394-B160-4C45EA928699}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Services", "HumanResources.Services\HumanResources.Services.csproj", "{50053463-B6CD-4394-B160-4C45EA928699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.DataModel.Builders", "HumanResources.DataModel.Builders\HumanResources.DataModel.Builders.csproj", "{A09C1151-6716-4B3D-A7C4-3CAA192183A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.DataModel.Builders", "HumanResources.DataModel.Builders\HumanResources.DataModel.Builders.csproj", "{A09C1151-6716-4B3D-A7C4-3CAA192183A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Database", "HumanResources.Database\HumanResources.Database.csproj", "{532E806B-7B42-43FF-A75A-DF4D0411A2A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A09C1151-6716-4B3D-A7C4-3CAA192183A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A09C1151-6716-4B3D-A7C4-3CAA192183A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A09C1151-6716-4B3D-A7C4-3CAA192183A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

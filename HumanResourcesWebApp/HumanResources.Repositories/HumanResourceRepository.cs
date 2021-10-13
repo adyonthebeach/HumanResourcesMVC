@@ -8,11 +8,11 @@ namespace HumanResources.Repositories
 {
     public class HumanResourceRepository : IHumanResourceRepository
     {
-        private readonly SqlConnection sqlConnection;
+        private readonly SqlConnection _sqlConnection;
 
         public HumanResourceRepository(SqlConnection sqlConnection)
         {
-            this.sqlConnection = sqlConnection;
+            _sqlConnection = sqlConnection;
         }
 
         public List<HumanResource> GetAllHumanResources()
@@ -20,9 +20,33 @@ namespace HumanResources.Repositories
             throw new NotImplementedException("To be done");
         }
 
-        public void Create(HumanResource humanResource)
+        public HumanResource Create(HumanResource humanResource)
         {
-            throw new NotImplementedException("To be Done");
+            using (_sqlConnection)
+            {
+                SqlCommand command = new SqlCommand("CreateResource", _sqlConnection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
+                command.Parameters.AddWithValue("@lastname", humanResource.LastName);
+                command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
+                command.Parameters.AddWithValue("@email", humanResource.Email);
+                command.Parameters.AddWithValue("@department", humanResource.Department);
+                command.Parameters.AddWithValue("@status", humanResource.Status);
+                
+
+                _sqlConnection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        humanResource.EmployeeNumber = int.Parse(reader["EmployeeNumber"].ToString());
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            return humanResource;
         }
     }
 }

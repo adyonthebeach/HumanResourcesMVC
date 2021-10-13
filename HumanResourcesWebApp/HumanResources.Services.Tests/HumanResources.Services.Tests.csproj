@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
@@ -14,6 +15,12 @@
     <PackageReference Include="SpecFlow" Version="3.9.22" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResources.Database\HumanResources.Database.csproj" />
+    <ProjectReference Include="..\HumanResources.DataModel.Builders\HumanResources.DataModel.Builders.csproj" />
+    <ProjectReference Include="..\HumanResources.Services\HumanResources.Services.csproj" />
   </ItemGroup>
 
 </Project>

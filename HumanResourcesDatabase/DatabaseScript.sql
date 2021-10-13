@@ -62,17 +62,16 @@ GO
 
 
 CREATE TABLE [dbo].[HumanResource](
-	[HumanResourceId] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeNumber] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](100) NOT NULL,
 	[LastName] [varchar](100) NOT NULL,
 	[Email] [varchar](200) NOT NULL,
 	[DateOfBirth] [smalldatetime] NULL,
 	[Department] [varchar](100) NOT NULL,
-	[StatusId] [int] NOT NULL,
-	[EmployeeNumber] [int] NOT NULL,
+	[StatusId] [int] NOT NULL
  CONSTRAINT [PK_HumanResource] PRIMARY KEY CLUSTERED 
 (
-	[HumanResourceId] ASC
+	[EmployeeNumber] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -84,4 +83,39 @@ GO
 ALTER TABLE [dbo].[HumanResource] CHECK CONSTRAINT [FK_HumanResource_ReferenceCodes]
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Adrian Walsh
+-- Create date: 13/10/2021
+-- Description:	
+-- =============================================
+CREATE PROCEDURE CreateResource 
+	-- Add the parameters for the stored procedure here
+	@firstname varchar(100),
+    @lastname varchar(100),
+    @dateOfBirth date,
+    @email varchar(200),
+    @department varchar(100),
+    @status varchar (100)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    INSERT INTO HumanResource (FirstName, LastName, DateOfBirth, Email, Department, StatusId)
+	VALUES (@firstname, 
+			@lastname, 
+			@dateOfBirth, 
+			@email, 
+			@department, 
+		(SELECT statusId 
+		 FROM ReferenceCodes 
+		 WHERE StatusDescription = @status 
+			AND StatusGroup = 'HumanResourceStatus'))
+
+	SELECT SCOPE_IDENTITY() EmployeeNumber
+END
+GO
 

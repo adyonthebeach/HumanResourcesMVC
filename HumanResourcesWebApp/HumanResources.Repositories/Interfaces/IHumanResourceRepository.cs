@@ -5,7 +5,7 @@ namespace HumanResources.Repositories.Interfaces
 {
     public interface IHumanResourceRepository
     {
-        void Create(HumanResource humanResource);
+        HumanResource Create(HumanResource humanResource);
         List<HumanResource> GetAllHumanResources();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using HumanResources.DataModels;
 using HumanResources.Repositories.Interfaces;
 using HumanResources.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace HumanResources.Services
@@ -20,9 +19,9 @@ namespace HumanResources.Services
             return _humanResourceRepository.GetAllHumanResources();
         }
 
-        public void Create(HumanResource humanResource)
+        public HumanResource Create(HumanResource humanResource)
         {
-            _humanResourceRepository.Create(humanResource);
+            return _humanResourceRepository.Create(humanResource);
         }
     }
 }

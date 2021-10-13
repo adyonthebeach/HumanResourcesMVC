@@ -9,12 +9,12 @@ namespace HumanResources.DataModel.Builders
         {
             var newHumanResource = new HumanResource()
             {
-                FirstName = new RandomStringBuilder().SetMaxLength(50).Build(),
-                LastName = new RandomStringBuilder().SetMaxLength(50).Build(),
+                FirstName = new RandomStringBuilder().SetMaxLength(100).Build(),
+                LastName = new RandomStringBuilder().SetMaxLength(100).Build(),
                 DateOfBirth = DateTime.Now,
-                Department = new RandomStringBuilder().SetMaxLength(50).Build(),
-                Email = new RandomStringBuilder().SetMaxLength(75).Build(),
-                EmployeeNumber = (int)DateTime.Now.Ticks
+                Department = new RandomStringBuilder().SetMaxLength(100).Build(),
+                Email = new RandomStringBuilder().SetMaxLength(200).Build(),
+                Status = new RandomStatusBuilder().Build()
             };
 
             return newHumanResource;
