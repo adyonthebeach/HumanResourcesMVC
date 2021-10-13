@@ -18,8 +18,8 @@ namespace HumanResources.Services.Tests.Steps
             _scenarioContext = scenarioContext;
         }
 
-        [Given(@"Given I am a Human resources manager")]
-        public void GivenGivenIAmAHumanResourcesManager()
+        [Given(@"I am a Human resources manager")]
+        public void GivenIAmAHumanResourcesManager()
         {
             var databaseConnections = new DatabaseConnections();
             var databaseConnection = new AccreditHrDatabaseConnectionFactory(databaseConnections).Create();
@@ -28,10 +28,10 @@ namespace HumanResources.Services.Tests.Steps
             var humanResourceService = new HumanResourceService(humanResourceRepository);
             _scenarioContext["HumanResourceService"] = humanResourceService;
 
-            var newResource = new RandomHumanResourceBuilder().Build();
+                var newResource = new RandomHumanResourceBuilder().Build();
             _scenarioContext["ExistingResource"] = humanResourceService.Create(newResource);
         }
-        
+
         [When(@"I update an existing human resource with valid data")]
         public void WhenIUpdateAnExistingHumanResourceWithValidData()
         {
@@ -44,7 +44,7 @@ namespace HumanResources.Services.Tests.Steps
             var humanResourceService = (HumanResourceService)_scenarioContext["HumanResourceService"];
             _scenarioContext["UpdatedResource"] = humanResourceService.Update(updatedResource);
         }
-        
+
         [Then(@"the database record will be updated")]
         public void ThenTheDatabaseRecordWillBeUpdated()
         {

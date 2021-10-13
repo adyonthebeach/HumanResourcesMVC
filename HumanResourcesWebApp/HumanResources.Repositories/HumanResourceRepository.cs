@@ -30,7 +30,7 @@ namespace HumanResources.Repositories
             command.Parameters.AddWithValue("@email", humanResource.Email);
             command.Parameters.AddWithValue("@department", humanResource.Department);
             command.Parameters.AddWithValue("@status", humanResource.Status);
-                
+
 
             _sqlConnection.Open();
             using (SqlDataReader reader = command.ExecuteReader())
@@ -66,6 +66,21 @@ namespace HumanResources.Repositories
             _sqlConnection.Close();
 
             return humanResource;
+        }
+
+        public int Delete(int employeeNumber)
+        {
+            SqlCommand command = new SqlCommand("DeleteResource", _sqlConnection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@employeenumber", employeeNumber);
+
+
+            _sqlConnection.Open();
+            var updatedRecords = command.ExecuteNonQuery();
+
+            _sqlConnection.Close();
+
+            return updatedRecords;
         }
     }
 }

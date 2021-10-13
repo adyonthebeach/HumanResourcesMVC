@@ -6,6 +6,7 @@ namespace HumanResources.Repositories.Interfaces
     public interface IHumanResourceRepository
     {
         HumanResource Create(HumanResource humanResource);
+        int Delete(int employeeNumber);
         List<HumanResource> GetAllHumanResources();
         HumanResource Update(HumanResource humanResource);
     }

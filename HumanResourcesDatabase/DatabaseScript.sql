@@ -152,3 +152,21 @@ BEGIN
 						AND StatusGroup = 'HumanResourceStatus')
 END
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Adrian Walsh
+-- Create date: 13/10/2021
+-- Description:	
+-- =============================================
+CREATE PROCEDURE DeleteResource 
+	@employeenumber int
+AS
+BEGIN
+	Delete from HumanResource
+	Where EmployeeNumber = @employeenumber
+END
+GO

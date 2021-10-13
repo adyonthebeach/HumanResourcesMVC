@@ -28,5 +28,10 @@ namespace HumanResources.Services
         {
             return _humanResourceRepository.Update(humanResource);
         }
+
+        public int Delete(int employeeNumber)
+        {
+            return _humanResourceRepository.Delete(employeeNumber);
+        }
     }
 }
