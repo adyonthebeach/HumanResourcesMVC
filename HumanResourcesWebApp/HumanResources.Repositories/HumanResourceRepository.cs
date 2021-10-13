@@ -17,7 +17,34 @@ namespace HumanResources.Repositories
 
         public List<HumanResource> GetAllHumanResources()
         {
-            throw new NotImplementedException("To be done");
+            List<HumanResource> allResources = new List<HumanResource>();
+
+            SqlCommand command = new SqlCommand("GetAllResources", _sqlConnection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+            _sqlConnection.Open();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    HumanResource resource = new HumanResource();
+                    resource.EmployeeNumber = int.Parse(reader["EmployeeNumber"].ToString());
+                    resource.FirstName = reader["FirstName"].ToString();
+                    resource.LastName = reader["LastName"].ToString();
+                    resource.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+                    resource.Email = reader["Email"].ToString();
+                    resource.Department = reader["Department"].ToString();
+                    resource.Status = reader["StatusDescription"].ToString();
+
+                    allResources.Add(resource);
+                }
+
+                reader.Close();
+            }
+            _sqlConnection.Close();
+
+            return allResources;
         }
 
         public HumanResource Create(HumanResource humanResource)

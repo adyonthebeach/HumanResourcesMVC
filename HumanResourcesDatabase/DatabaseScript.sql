@@ -170,3 +170,29 @@ BEGIN
 	Where EmployeeNumber = @employeenumber
 END
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Adrian Walsh
+-- Create date: 13/10/2021
+-- Description:	
+-- =============================================
+CREATE PROCEDURE GetAllResources 
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    SELECT  hr.EmployeeNumber,
+			hr.FirstName,
+			hr.LastName,
+			hr.DateOfBirth,
+			hr.Department,
+			hr.Email,
+			rc.StatusDescription
+	FROM HumanResource hr
+		INNER JOIN ReferenceCodes rc	ON	hr.StatusId = rc.StatusId
+END
+GO
