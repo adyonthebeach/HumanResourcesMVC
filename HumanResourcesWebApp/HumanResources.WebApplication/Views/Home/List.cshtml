@@ -4,19 +4,23 @@
     ViewData["Title"] = "Human Resource List";
 }
 
-<h1>Human resource List</h1>
+<h1>Human Resource List</h1>
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><text>Department </text>@Html.DropDownList("Department", new SelectList(ViewBag.Department))</td>
+                <td><text>Status </text>@Html.DropDownList("ResourceStatus", new SelectList(ViewBag.ResourceStatus))</td>
+                <td><input type="submit" value="Search" /></td>
+            </tr>
+        </tbody>
+    </table>  
+}
 
 <p>
-    @using(Html.BeginForm())
-    {
-        <text>Department </text>@Html.DropDownList("Department", new SelectList(ViewBag.Department))
-        <text>Status </text>@Html.DropDownList("ResourceStatus", new SelectList(ViewBag.ResourceStatus))
-        <input type="submit" value="Search" />
-    }
-</p>
-
-<p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Add">Add New Resource</a>
 </p>
 <table class="table">
     <thead>
@@ -46,36 +50,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Department)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.EmployeeNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeNumber })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

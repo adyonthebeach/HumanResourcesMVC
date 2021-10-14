@@ -4,9 +4,11 @@ using HumanResources.Repositories;
 using HumanResources.Repositories.Interfaces;
 using HumanResources.Services;
 using HumanResources.Services.Interfaces;
+using HumanResources.WebApplication.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,11 +31,20 @@ namespace HumanResources.WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<AccreditSettings>(Configuration.GetSection(AccreditSettings.SectionName));
+
             services.AddSingleton<IDatabaseConnections, DatabaseConnections>();
             services.AddScoped<IConnectionFactory, AccreditHrDatabaseConnectionFactory>();
             services.AddScoped<IHumanResourceRepository, HumanResourceRepository>();
             services.AddScoped<IHumanResourceService, HumanResourceService>();
+
             services.AddControllersWithViews();
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
