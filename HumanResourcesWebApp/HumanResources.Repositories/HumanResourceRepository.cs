@@ -1,4 +1,5 @@
-﻿using HumanResources.DataModels;
+﻿using HumanResources.Database.Interfaces;
+using HumanResources.DataModels;
 using HumanResources.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace HumanResources.Repositories
     {
         private readonly SqlConnection _sqlConnection;
 
-        public HumanResourceRepository(SqlConnection sqlConnection)
+        public HumanResourceRepository(IConnectionFactory connectionFactory)
         {
-            _sqlConnection = sqlConnection;
+            _sqlConnection = connectionFactory.Create();
         }
 
         public List<HumanResource> GetAllHumanResources()
@@ -45,6 +46,36 @@ namespace HumanResources.Repositories
             _sqlConnection.Close();
 
             return allResources;
+        }
+
+        public HumanResource GetHumanResource(int employeeNumber)
+        {
+            HumanResource resource = new HumanResource();
+
+            SqlCommand command = new SqlCommand("GetResource", _sqlConnection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@employeenumber", employeeNumber);
+
+
+            _sqlConnection.Open();
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    resource.EmployeeNumber = int.Parse(reader["EmployeeNumber"].ToString());
+                    resource.FirstName = reader["FirstName"].ToString();
+                    resource.LastName = reader["LastName"].ToString();
+                    resource.DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
+                    resource.Email = reader["Email"].ToString();
+                    resource.Department = reader["Department"].ToString();
+                    resource.Status = reader["StatusDescription"].ToString();
+                }
+
+                reader.Close();
+            }
+            _sqlConnection.Close();
+
+            return resource;
         }
 
         public HumanResource Create(HumanResource humanResource)

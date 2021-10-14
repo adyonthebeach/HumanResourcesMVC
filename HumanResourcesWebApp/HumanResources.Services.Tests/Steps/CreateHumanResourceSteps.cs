@@ -20,7 +20,7 @@ namespace HumanResources.Services.Tests.Steps
         public void GivenIAmAHumanResourcesManager()
         {
             var databaseConnections = new DatabaseConnections();
-            var databaseConnection = new AccreditHrDatabaseConnectionFactory(databaseConnections).Create();
+            var databaseConnection = new AccreditHrDatabaseConnectionFactory(databaseConnections);
 
             var humanResourceRepository = new HumanResourceRepository(databaseConnection);
             _scenarioContext["HumanResourceService"] = new HumanResourceService(humanResourceRepository);

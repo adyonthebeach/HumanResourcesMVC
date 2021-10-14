@@ -19,6 +19,11 @@ namespace HumanResources.Services
             return _humanResourceRepository.GetAllHumanResources();
         }
 
+        public HumanResource GetHumanResource(int employeeNumber)
+        {
+            return _humanResourceRepository.GetHumanResource(employeeNumber);
+        }
+
         public HumanResource Create(HumanResource humanResource)
         {
             return _humanResourceRepository.Create(humanResource);

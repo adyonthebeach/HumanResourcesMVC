@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HumanResources.Database\HumanResources.Database.csproj" />
     <ProjectReference Include="..\HumanResources.DataModels\HumanResources.DataModels.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using HumanResources.Database.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Reflection;
 
 namespace HumanResources.Database
 {
@@ -13,8 +14,9 @@ namespace HumanResources.Database
 
         private void LoadDatabaseConnections()
         {
+            string directoryName = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
             IConfiguration config = new ConfigurationBuilder()
-                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .SetBasePath(directoryName)
                             .AddJsonFile(@"connectionStrings.json", true, true)
                             .Build();
 

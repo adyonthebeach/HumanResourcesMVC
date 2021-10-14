@@ -8,6 +8,7 @@ namespace HumanResources.Repositories.Interfaces
         HumanResource Create(HumanResource humanResource);
         int Delete(int employeeNumber);
         List<HumanResource> GetAllHumanResources();
+        HumanResource GetHumanResource(int employeeNumber);
         HumanResource Update(HumanResource humanResource);
     }
 }
