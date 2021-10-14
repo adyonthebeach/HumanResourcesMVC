@@ -150,6 +150,7 @@ BEGIN
 					 FROM ReferenceCodes 
 					 WHERE StatusDescription = @status 
 						AND StatusGroup = 'HumanResourceStatus')
+	WHERE EmployeeNumber = @employeenumber
 END
 GO
 

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResources.Database\HumanResources.Database.csproj" />
+    <ProjectReference Include="..\HumanResources.DataModels\HumanResources.DataModels.csproj" />
+    <ProjectReference Include="..\HumanResources.Repositories\HumanResources.Repositories.csproj" />
+    <ProjectReference Include="..\HumanResources.Services\HumanResources.Services.csproj" />
+  </ItemGroup>
+
+</Project>

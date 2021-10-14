@@ -180,6 +180,24 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HumanResources.Database\HumanResources.Database.csproj">
+      <Project>{532e806b-7b42-43ff-a75a-df4d0411a2a8}</Project>
+      <Name>HumanResources.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HumanResources.DataModels\HumanResources.DataModels.csproj">
+      <Project>{4cd48bd3-28bb-41c9-a177-2fb24b992b65}</Project>
+      <Name>HumanResources.DataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HumanResources.Repositories\HumanResources.Repositories.csproj">
+      <Project>{031d2da4-fabb-4f9c-adf4-2fadd53f4322}</Project>
+      <Name>HumanResources.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HumanResources.Services\HumanResources.Services.csproj">
+      <Project>{50053463-b6cd-4394-b160-4c45ea928699}</Project>
+      <Name>HumanResources.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

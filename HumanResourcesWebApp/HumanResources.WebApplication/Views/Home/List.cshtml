@@ -1,0 +1,91 @@
+﻿@model IPagedList<HumanResources.DataModels.HumanResource>
+
+@{
+    ViewData["Title"] = "Human Resource List";
+}
+
+<h1>Human resource List</h1>
+
+<p>
+    @using(Html.BeginForm())
+    {
+        <text>Department </text>@Html.DropDownList("Department", new SelectList(ViewBag.Department))
+        <text>Status </text>@Html.DropDownList("ResourceStatus", new SelectList(ViewBag.ResourceStatus))
+        <input type="submit" value="Search" />
+    }
+</p>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().EmployeeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="pull-right">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("List",
+        new { page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+            Display = X.PagedList.Web.Common.PagedListDisplayMode.IfNeeded
+        })
+</div>
