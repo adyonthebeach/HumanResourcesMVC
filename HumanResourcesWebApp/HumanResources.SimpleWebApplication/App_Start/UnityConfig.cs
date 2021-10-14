@@ -14,6 +14,7 @@ namespace HumanResources.SimpleWebApplication
             // it is NOT necessary to register your controllers
             
             container.RegisterType<IDatabaseConnections, DatabaseConnections>();
+            container.RegisterType<IHumanResourcesRepository, HumanResourcesRepository>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
