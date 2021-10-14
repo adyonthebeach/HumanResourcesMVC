@@ -15,8 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.DataModel.Bu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Database", "HumanResources.Database\HumanResources.Database.csproj", "{532E806B-7B42-43FF-A75A-DF4D0411A2A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.SimpleWebApplication", "HumanResources.SimpleWebApplication\HumanResources.SimpleWebApplication.csproj", "{BC90D6B4-9E68-4992-B88C-960CF34A673E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{532E806B-7B42-43FF-A75A-DF4D0411A2A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC90D6B4-9E68-4992-B88C-960CF34A673E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC90D6B4-9E68-4992-B88C-960CF34A673E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC90D6B4-9E68-4992-B88C-960CF34A673E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC90D6B4-9E68-4992-B88C-960CF34A673E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
