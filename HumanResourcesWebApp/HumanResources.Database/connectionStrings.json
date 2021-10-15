@@ -1,5 +1,5 @@
 {
   "DatabaseConnections": {
-    "AccreditHr": "Data Source=WILLOWBANKLAPTO\\WILLOWBANK;Initial Catalog=AccreditHr; Integrated Security=True"
+    "AccreditHr": "Data Source=ADD_YOUR_DATABASE_SERVER_HERE;Initial Catalog=AccreditHr; Integrated Security=True"
   }
 }
