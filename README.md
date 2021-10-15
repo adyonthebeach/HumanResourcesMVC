@@ -30,10 +30,17 @@ User Story | Acceptance Criteria
 2. Open DatabaseScript.sql in MSSQL
 3. Update the database installation location on lines 8 & 10 ****NOTE : This step is important ****
 4. Run script
-5. Open Visual Studio Solution in VS2019
-6. Update the database connection string ****NOTE : This step is also important ****
-7. Build Solution
-8. Run Tests to seed database data (Specflow Extension may be needed)
+5. To seed the database with some meanigful data once the database has been created run the SeedData.sql script
+6. Open Visual Studio Solution in VS2019
+7. Update the database connection string which can be found in the connectionStrings.json file in the HumanResources.Database ****NOTE : This step is also important ****
+8. Build Solution
+9. Run Tests to validate the Service layer of the application (NOTE: this will no doubt produce some random garbage data)
 
 ## Considerations
- 
+1. To be able to scale out the application I would consider extracting the data requests from the UI into an seperate API
+2. The application works by requesting the whole list of resources from the database
+        a. This approach is not great, but the pagination works really well
+        b. This method will only perform well until the dataset gets very big
+        c. The filtering is a task that should be performed by the database
+        d. I would recommend upgrading this part of the application first
+3. The specflow tests work well enough for this demo but I would consider more unit tests on the controller methods, mocking the data and using API tests once the data reqeusts have been split out
