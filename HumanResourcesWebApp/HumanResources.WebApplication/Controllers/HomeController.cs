@@ -3,7 +3,6 @@ using HumanResources.Services.Interfaces;
 using HumanResources.WebApplication.Helpers;
 using HumanResources.WebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
@@ -17,7 +16,10 @@ namespace HumanResources.WebApplication.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHumanResourceService _humanResourceService;
-        private readonly int _pageSize;
+        private readonly int _totalResultsPerPage;
+        private readonly ResourceList _resourceList;
+        private readonly DepartmentViewBag _departmentViewBag;
+        private readonly StatusViewBag _statusViewBag;
 
         public HomeController(ILogger<HomeController> logger,
             IHumanResourceService humanResourceService,
@@ -25,7 +27,10 @@ namespace HumanResources.WebApplication.Controllers
         {
             _logger = logger;
             _humanResourceService = humanResourceService;
-            _pageSize = accreditSettings.Value.TotalResultsPerPage;
+            _totalResultsPerPage = accreditSettings.Value.TotalResultsPerPage;
+            _resourceList = new ResourceList();
+            _departmentViewBag = new DepartmentViewBag();
+            _statusViewBag = new StatusViewBag();
         }
 
         public IActionResult Index()
@@ -35,22 +40,21 @@ namespace HumanResources.WebApplication.Controllers
 
         public ActionResult List(string department, string resourceStatus, int? page)
         {
-            var pageNumber = page ?? 1;
-            var pageSize = _pageSize;
             var resourceList = _humanResourceService.GetAllHumanResources();
 
-            ViewBag.Department = GetDistinctListOfDepartments(resourceList);
-            ViewBag.ResourceStatus = GetDistintListOfResourceStatus(resourceList);
+            ViewBag.Department = _departmentViewBag.GetDistinctList(resourceList);
+            ViewBag.ResourceStatus = _statusViewBag.GetDistintList(resourceList);
 
-            IEnumerable<HumanResource> filteredList = GetFilteredListOfResources(department, resourceStatus, resourceList);
+            IEnumerable<HumanResource> filteredList = _resourceList.Filter(department, resourceStatus, resourceList);
 
-            return View(filteredList.ToPagedList(pageNumber, pageSize));
+            var pageNumber = page ?? 1;
+            return View(filteredList.ToPagedList(pageNumber, _totalResultsPerPage));
         }
 
         public IActionResult Add()
         {
             var resourceList = _humanResourceService.GetAllHumanResources();
-            ViewBag.Status = GetViewBagStatusList(resourceList);
+            ViewBag.Status = _statusViewBag.GetStatusListItems(resourceList);
             return View();
         }
 
@@ -58,6 +62,10 @@ namespace HumanResources.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(HumanResource humanResource)
         {
+            if(!ModelState.IsValid)
+            {
+                return new BadRequestResult();
+            }
             _humanResourceService.Create(humanResource);
             return RedirectToAction("List");
         }
@@ -66,7 +74,7 @@ namespace HumanResources.WebApplication.Controllers
         {
             var resourceList = _humanResourceService.GetAllHumanResources();
             var resource = resourceList.FirstOrDefault(resource => resource.EmployeeNumber == id);
-            ViewBag.Status = GetViewBagStatusList(resourceList);
+            ViewBag.Status = _statusViewBag.GetStatusListItems(resourceList);
             return View(resource);
         }
 
@@ -74,14 +82,17 @@ namespace HumanResources.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(HumanResource humanResource)
         {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestResult();
+            }
             _humanResourceService.Update(humanResource);
             return RedirectToAction("List");
         }
 
         public IActionResult Delete(int id)
         {
-            var resourceList = _humanResourceService.GetAllHumanResources();
-            var resource = resourceList.FirstOrDefault(resource => resource.EmployeeNumber == id);
+            var resource = _humanResourceService.GetHumanResource(id);
             return View(resource);
         }
 
@@ -98,46 +109,6 @@ namespace HumanResources.WebApplication.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        private IEnumerable<HumanResource> GetFilteredListOfResources(string department, string resourceStatus, List<HumanResource> resourceList)
-        {
-            return from resource in resourceList
-                   orderby resource.FirstName, resource.LastName
-                   where resource.Department == department || department == null || department == ""
-                   where resource.Status == resourceStatus || resourceStatus == null || resourceStatus == ""
-                   select resource;
-        }
-
-        private IEnumerable<string> GetDistintListOfResourceStatus(List<HumanResource> resourceList)
-        {
-            return (from resource in resourceList
-                    select resource.Status).Distinct();
-        }
-
-        private IEnumerable<string> GetDistinctListOfDepartments(List<HumanResource> resourceList)
-        {
-            return (from resource in resourceList
-                    select resource.Department).Distinct();
-        }
-
-        private List<SelectListItem> GetViewBagStatusList(List<HumanResource> resourceList)
-        {
-            var distinctStatusList = GetDistintListOfResourceStatus(resourceList);
-            return ListOfResourceStatusSelectListItems(distinctStatusList);
-        }
-
-        private List<SelectListItem> ListOfResourceStatusSelectListItems(IEnumerable<string> distinctStatusList)
-        {
-            List<SelectListItem> selectListOfResourceStatus = new List<SelectListItem>();
-            foreach (string status in distinctStatusList)
-            {
-                selectListOfResourceStatus.Add(
-                    new SelectListItem
-                    {
-                        Value = status,
-                        Text = status
-                    });
-            }
-            return selectListOfResourceStatus;
-        }
+        
     }
 }

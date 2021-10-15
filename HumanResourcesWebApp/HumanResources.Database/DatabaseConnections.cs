@@ -7,6 +7,8 @@ namespace HumanResources.Database
 {
     public class DatabaseConnections : IDatabaseConnections
     {
+        public string AccreditHr { get; set; }
+
         public DatabaseConnections()
         {
             LoadDatabaseConnections();
@@ -14,15 +16,28 @@ namespace HumanResources.Database
 
         private void LoadDatabaseConnections()
         {
-            string directoryName = new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
-            IConfiguration config = new ConfigurationBuilder()
+            var directoryName = GetConfigurationFileDirectoryName();
+            var configurations = GetConfigurations(directoryName);
+
+            AccreditHr = GetAccreditHrConnection(configurations);
+        }
+
+        private static string GetAccreditHrConnection(IConfiguration configurations)
+        {
+            return configurations.GetSection("DatabaseConnections:AccreditHr").Value;
+        }
+
+        private static IConfiguration GetConfigurations(string directoryName)
+        {
+            return new ConfigurationBuilder()
                             .SetBasePath(directoryName)
                             .AddJsonFile(@"connectionStrings.json", true, true)
                             .Build();
-
-            AccreditHr = config.GetSection("DatabaseConnections:AccreditHr").Value;
         }
 
-        public string AccreditHr { get; set; }
+        private static string GetConfigurationFileDirectoryName()
+        {
+            return new FileInfo(Assembly.GetExecutingAssembly().Location).DirectoryName;
+        }
     }
 }

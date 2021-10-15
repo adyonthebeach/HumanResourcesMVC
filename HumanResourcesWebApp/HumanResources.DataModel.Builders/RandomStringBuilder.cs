@@ -18,16 +18,16 @@ namespace HumanResources.DataModel.Builders
 
         public string Build()
         {
-            StringBuilder strbuilder = new StringBuilder();
+            StringBuilder randomStringBuilder = new StringBuilder();
             Random random = new Random();
             for (int i = 0; i < _stringLength; i++)
             {
                 double randomDouble = random.NextDouble();
                 char myChar = ConvertDoubleToChar(randomDouble);
-                strbuilder.Append(myChar);
+                randomStringBuilder.Append(myChar);
             }
 
-            return strbuilder.ToString();
+            return randomStringBuilder.ToString();
         }
 
         /// <summary>

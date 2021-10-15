@@ -20,9 +20,10 @@ namespace HumanResources.Repositories
         {
             List<HumanResource> allResources = new List<HumanResource>();
 
-            SqlCommand command = new SqlCommand("GetAllResources", _sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-
+            SqlCommand command = new SqlCommand("GetAllResources", _sqlConnection)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure
+            };
 
             _sqlConnection.Open();
             using (SqlDataReader reader = command.ExecuteReader())
@@ -52,10 +53,14 @@ namespace HumanResources.Repositories
         {
             HumanResource resource = new HumanResource();
 
-            SqlCommand command = new SqlCommand("GetResource", _sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@employeenumber", employeeNumber);
-
+            SqlCommand command = new SqlCommand("GetResource", _sqlConnection)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure,
+                Parameters =
+                {
+                    new SqlParameter("@employeeNumber", employeeNumber)
+                }
+            };
 
             _sqlConnection.Open();
             using (SqlDataReader reader = command.ExecuteReader())
@@ -80,15 +85,19 @@ namespace HumanResources.Repositories
 
         public HumanResource Create(HumanResource humanResource)
         {
-            SqlCommand command = new SqlCommand("CreateResource", _sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
-            command.Parameters.AddWithValue("@lastname", humanResource.LastName);
-            command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
-            command.Parameters.AddWithValue("@email", humanResource.Email);
-            command.Parameters.AddWithValue("@department", humanResource.Department);
-            command.Parameters.AddWithValue("@status", humanResource.Status);
-
+            SqlCommand command = new SqlCommand("CreateResource", _sqlConnection)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure,
+                Parameters =
+                {
+                    new SqlParameter("@firstName", humanResource.FirstName),
+                    new SqlParameter("@lastName", humanResource.LastName),
+                    new SqlParameter("@dateOfBirth", humanResource.DateOfBirth),
+                    new SqlParameter("@email", humanResource.Email),
+                    new SqlParameter("@department", humanResource.Department),
+                    new SqlParameter("@status", humanResource.Status)
+                }
+            };
 
             _sqlConnection.Open();
             using (SqlDataReader reader = command.ExecuteReader())
@@ -107,16 +116,20 @@ namespace HumanResources.Repositories
 
         public HumanResource Update(HumanResource humanResource)
         {
-            SqlCommand command = new SqlCommand("UpdateResource", _sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@employeenumber", humanResource.EmployeeNumber);
-            command.Parameters.AddWithValue("@firstname", humanResource.FirstName);
-            command.Parameters.AddWithValue("@lastname", humanResource.LastName);
-            command.Parameters.AddWithValue("@dateOfBirth", humanResource.DateOfBirth);
-            command.Parameters.AddWithValue("@email", humanResource.Email);
-            command.Parameters.AddWithValue("@department", humanResource.Department);
-            command.Parameters.AddWithValue("@status", humanResource.Status);
-
+            SqlCommand command = new SqlCommand("UpdateResource", _sqlConnection)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure,
+                Parameters =
+                {
+                    new SqlParameter("@employeeNumber", humanResource.EmployeeNumber),
+                    new SqlParameter("@firstName", humanResource.FirstName),
+                    new SqlParameter("@lastName", humanResource.LastName),
+                    new SqlParameter("@dateOfBirth", humanResource.DateOfBirth),
+                    new SqlParameter("@email", humanResource.Email),
+                    new SqlParameter("@department", humanResource.Department),
+                    new SqlParameter("@status", humanResource.Status)
+                }
+            };
 
             _sqlConnection.Open();
             command.ExecuteNonQuery();
@@ -128,10 +141,14 @@ namespace HumanResources.Repositories
 
         public int Delete(int employeeNumber)
         {
-            SqlCommand command = new SqlCommand("DeleteResource", _sqlConnection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@employeenumber", employeeNumber);
-
+            SqlCommand command = new SqlCommand("DeleteResource", _sqlConnection)
+            {
+                CommandType = System.Data.CommandType.StoredProcedure,
+                Parameters =
+                {
+                    new SqlParameter("@employeeNumber", employeeNumber)
+                }
+            };
 
             _sqlConnection.Open();
             var updatedRecords = command.ExecuteNonQuery();

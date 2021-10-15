@@ -93,9 +93,8 @@ GO
 -- Description:	
 -- =============================================
 CREATE PROCEDURE CreateResource 
-	-- Add the parameters for the stored procedure here
-	@firstname varchar(100),
-    @lastname varchar(100),
+	@firstName varchar(100),
+    @lastName varchar(100),
     @dateOfBirth date,
     @email varchar(200),
     @department varchar(100),
@@ -105,8 +104,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     INSERT INTO HumanResource (FirstName, LastName, DateOfBirth, Email, Department, StatusId)
-	VALUES (@firstname, 
-			@lastname, 
+	VALUES (@firstName, 
+			@lastName, 
 			@dateOfBirth, 
 			@email, 
 			@department, 
@@ -129,9 +128,9 @@ GO
 -- Description:	
 -- =============================================
 CREATE PROCEDURE UpdateResource 
-	@employeenumber int,
-    @firstname varchar(100),
-    @lastname varchar(100),
+	@employeeNumber int,
+    @firstName varchar(100),
+    @lastName varchar(100),
     @dateOfBirth datetime,
     @email varchar(200),
     @department varchar(100),
@@ -141,8 +140,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     UPDATE HumanResource
-	SET FirstName = @firstname,
-		LastName = @lastname,
+	SET FirstName = @firstName,
+		LastName = @lastName,
 		DateOfBirth = @dateOfBirth,
 		Email = @email,
 		Department = @department,
@@ -150,7 +149,7 @@ BEGIN
 					 FROM ReferenceCodes 
 					 WHERE StatusDescription = @status 
 						AND StatusGroup = 'HumanResourceStatus')
-	WHERE EmployeeNumber = @employeenumber
+	WHERE EmployeeNumber = @employeeNumber
 END
 GO
 
@@ -164,11 +163,11 @@ GO
 -- Description:	
 -- =============================================
 CREATE PROCEDURE DeleteResource 
-	@employeenumber int
+	@employeeNumber int
 AS
 BEGIN
 	Delete from HumanResource
-	Where EmployeeNumber = @employeenumber
+	Where EmployeeNumber = @employeeNumber
 END
 GO
 
@@ -195,5 +194,33 @@ BEGIN
 			rc.StatusDescription
 	FROM HumanResource hr
 		INNER JOIN ReferenceCodes rc	ON	hr.StatusId = rc.StatusId
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Adrian Walsh
+-- Create date: 13/10/2021
+-- Description:	
+-- =============================================
+CREATE PROCEDURE GetResource 
+	@employeeNumber int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+    SELECT  hr.EmployeeNumber,
+			hr.FirstName,
+			hr.LastName,
+			hr.DateOfBirth,
+			hr.Department,
+			hr.Email,
+			rc.StatusDescription
+	FROM HumanResource hr
+		INNER JOIN ReferenceCodes rc	ON	hr.StatusId = rc.StatusId
+	Where EmployeeNumber = @employeeNumber
 END
 GO

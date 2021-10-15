@@ -8,11 +8,12 @@
 
 @using (Html.BeginForm())
 {
+    <h4>Filter List</h4>
     <table class="table">
         <tbody>
             <tr>
-                <td><text>Department </text>@Html.DropDownList("Department", new SelectList(ViewBag.Department))</td>
-                <td><text>Status </text>@Html.DropDownList("ResourceStatus", new SelectList(ViewBag.ResourceStatus))</td>
+                <td><text>Department </text>@Html.DropDownList("Department", new SelectList(ViewBag.Department), "")</td>
+                <td><text>Status </text>@Html.DropDownList("ResourceStatus", new SelectList(ViewBag.ResourceStatus), "")</td>
                 <td><input type="submit" value="Search" /></td>
             </tr>
         </tbody>
