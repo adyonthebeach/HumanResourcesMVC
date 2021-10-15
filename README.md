@@ -30,7 +30,7 @@ User Story | Acceptance Criteria
 2. Open DatabaseScript.sql in MSSQL
 3. Update the database installation location on lines 8 & 10 ****NOTE : This step is important ****
 4. Run script
-5. To seed the database with some meanigful data once the database has been created run the SeedData.sql script
+5. To seed the database with some meaningful data once the database has been created run the SeedData.sql script
 6. Open Visual Studio Solution in VS2019
 7. Update the database connection string which can be found in the connectionStrings.json file in the HumanResources.Database ****NOTE : This step is also important ****
 8. Build Solution
