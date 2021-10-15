@@ -30,11 +30,14 @@ User Story | Acceptance Criteria
 2. Open DatabaseScript.sql in MSSQL
 3. Update the database installation location on lines 8 & 10 ****NOTE : This step is important ****
 4. Run script
-5. To seed the database with some meanigful data once the database has been created run the SeedData.sql script
+5. To seed the database with some meaningful data once the database has been created run the SeedData.sql script
 6. Open Visual Studio Solution in VS2019
-7. Update the database connection string which can be found in the connectionStrings.json file in the HumanResources.Database ****NOTE : This step is also important ****
+7. Update the database connection string (Database Only) which can be found in the connectionStrings.json file in the HumanResources.Database project ****NOTE : This step is also important ****
 8. Build Solution
 9. Run Tests to validate the Service layer of the application (NOTE: this will no doubt produce some random garbage data)
+10. Make sure the HumanResource.WebApplication is set as the start up project
+11. Run the application
+12. Enjoy!
 
 ## Considerations
 1. To be able to scale out the application I would consider extracting the data requests from the UI into an seperate API
